@@ -20,6 +20,9 @@
  *   getStringLength(undefined) => 0
  */
 function getStringLength(value) {
+  if (value === null || value === undefined) {
+    return 0;
+  }
   return value.length;
 }
 
@@ -131,12 +134,7 @@ function removeTrailingWhitespaces(value) {
  *   repeatString('abc', -2) => ''
  */
 function repeatString(str, times) {
-  let arr = [];
-
-  while (arr.length <= times) {
-    arr += str;
-  }
-  return arr;
+  return str && times > 0 ? str.repeat(times) : '';
 }
 
 /**
@@ -267,12 +265,7 @@ function formatTime(minutes, seconds) {
  *   reverseString('12345') => '54321'
  */
 function reverseString(str) {
-  const arrStr = str.split('');
-  const reversArrStr = [];
-  for (let i = arrStr.length - 1; i >= 0; i = -1) {
-    reversArrStr.push(arrStr[i]);
-  }
-  return reversArrStr.join('');
+  return [...str].reverse().join('');
 }
 
 /**
@@ -377,9 +370,11 @@ function findLongestWord(sentence) {
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
 function reverseWords(str) {
-  return str
+  const result = str
     .split(' ')
-    .map((word) => word.split('').reverse().join('').join(' '));
+    .map((a) => a.split('').reverse().join(''))
+    .join(' ');
+  return result;
 }
 
 /**
